@@ -1,0 +1,13 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+       "eslint.options": {    //指定vscode的eslint所处理的文件的后缀
+           "extensions": [
+               ".js",
+               ".ts",
+               ".tsx"
+           ]
+       },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+}
