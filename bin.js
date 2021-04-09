@@ -18,7 +18,7 @@ program
     .option("--ip", "以ip启动项目")
     .option("-e, --env <env>", "启动环境", "t1")
     .option("-m, --mode <mode>", "打包模式", "production")
-    .option("-p, --port <port>", "启动端口号", 8001);
+    .option("-p, --port <port>", "启动端口号", 8002);
 
 program.command("dev").description("开发模式").action(devCmd);
 program.command("build").description("打包模式").action(buildCmd);
@@ -43,7 +43,6 @@ function buildCmd() {
 }
 
 function dllCmd() {
-    console.log("dll", program.mode);
     process.env.NODE_ENV = program.mode;
     execSync("npm run build:dll", { stdio: "inherit" });
 }
@@ -60,6 +59,7 @@ function getIpAddress() {
             }
         }
     });
+    console.log("ipAddress", ipAddress);
     return ipAddress;
 }
 

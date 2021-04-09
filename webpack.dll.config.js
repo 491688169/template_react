@@ -25,7 +25,7 @@ const manifestName = isDev ? "manifest.dll.dev.json" : "manifest.dll.prod.json";
 module.exports = {
     mode: isDev ? "development" : "production",
     entry: {
-        vendor: ["react", "react-dom"],
+        vendor: ["react", "react-dom", "react-router-dom"],
     },
     output: {
         path: dllDir,

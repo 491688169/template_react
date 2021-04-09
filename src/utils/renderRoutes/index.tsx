@@ -34,26 +34,26 @@ export interface IComponent extends FunctionComponent {
 }
 
 function render({ route, props }: { route: IRoute; props?: any }) {
-    const routes = renderRoutes(route.routes || [], {location: props.location})
-    const {component: Component, wrappers} = route
+    const routes = renderRoutes(route.routes || [], { location: props.location });
+    const { component: Component, wrappers } = route;
     if (Component) {
         const newProps = {
             ...props,
-            route
-        }
-        let ret = <Component {...newProps} />
+            route,
+        };
+        let ret = <Component {...newProps} />;
 
         if (wrappers) {
-            let len = wrappers.length - 1
-            while (len >=0) {
-                ret = createElement(wrappers[len], newProps, ret)
-                len -= 1
+            let len = wrappers.length - 1;
+            while (len >= 0) {
+                ret = createElement(wrappers[len], newProps, ret);
+                len -= 1;
             }
         }
 
-        return ret
+        return ret;
     } else {
-        return routes
+        return routes;
     }
 }
 

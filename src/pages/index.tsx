@@ -6,8 +6,8 @@
  * @Description:
  * @FilePath: /template_react/src/pages/index.tsx
  */
-import ReactDOM from "react-dom";
+import start from "@/utils/setup";
 
-import Login from "./Login";
+import routes from "@/configs/routes.config";
 
-ReactDOM.render(<Login />, document.querySelector("#root"));
+start({ basename: "test", routes });

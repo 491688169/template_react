@@ -9,7 +9,6 @@
 const path = require("path");
 
 const webpack = require("webpack");
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
@@ -68,21 +67,11 @@ module.exports = {
     resolve: {
         extensions: [".js", ".json", ".ts", ".tsx"],
         alias: {
-            $confgs: path.join(srcDir, "configs"),
-            $components: path.join(srcDir, "components"),
+            "@": srcDir,
         },
     },
     optimization: {
         runtimeChunk: true,
-        minimizer: [
-            new UglifyJSPlugin({
-                uglifyOptions: {
-                    compress: {
-                        pure_funcs: ["console.log"],
-                    },
-                },
-            }),
-        ],
     },
     devtool: isDev && "eval-source-map",
     devServer: {
