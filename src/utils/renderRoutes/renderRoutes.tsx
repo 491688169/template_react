@@ -6,7 +6,7 @@
  * @Description:
  * @FilePath: /template_react/src/utils/renderRoutes/renderRoutes.tsx
  */
-import { FunctionComponent } from "react";
+import { FunctionComponent, createElement } from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
 
 export interface IRoute {
@@ -33,9 +33,31 @@ export interface IComponent extends FunctionComponent {
     preload?: () => Promise<any>;
 }
 
-function render({ route, extraProps }: { route: IRoute; extraProps?: object }) {}
+function render({ route, props }: { route: IRoute; props?: any }) {
+    const routes = renderRoutes(route.routes || [], {location: props.location})
+    const {component: Component, wrappers} = route
+    if (Component) {
+        const newProps = {
+            ...props,
+            route
+        }
+        let ret = <Component {...newProps} />
 
-function getRouteElement({ route, extraProps, index }: IGetRouteElement) {
+        if (wrappers) {
+            let len = wrappers.length - 1
+            while (len >=0) {
+                ret = createElement(wrappers[len], newProps, ret)
+                len -= 1
+            }
+        }
+
+        return ret
+    } else {
+        return routes
+    }
+}
+
+function getRouteElement({ route, index }: IGetRouteElement) {
     const routeProps = {
         key: route.key || index,
         exact: route.exact,
@@ -59,17 +81,17 @@ function getRouteElement({ route, extraProps, index }: IGetRouteElement) {
         <Route
             {...routeProps}
             render={(props: object) => {
-                return render({ route, extraProps });
+                return render({ route, props });
             }}
         />
     );
 }
 
-export default function renderRoutes(routes: IRoute[], extraProps = {}, switchProps = {}) {
+export default function renderRoutes(routes: IRoute[], switchProps = {}) {
     return routes ? (
         <Switch {...switchProps}>
             {routes.map((route, index) => {
-                return getRouteElement({ route, extraProps, index });
+                return getRouteElement({ route, index });
             })}
         </Switch>
     ) : null;
