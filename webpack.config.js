@@ -41,7 +41,8 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                use: "ts-loader",
+                include: srcDir,
+                use: ["babel-loader", "ts-loader"],
             },
             {
                 test: /\.s[ac]ss$/i,
@@ -62,6 +63,26 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.less$/i,
+                use: [
+                    process.env.NODE_ENV !== "prod" ? "style-loader" : MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true,
+                        },
+                    },
+                    {
+                        loader: "less-loader",
+                        options: {
+                            lessOptions: {
+                                javascriptEnabled: true,
+                            },
+                        },
+                    },
+                ],
+            },
         ],
     },
     resolve: {
@@ -70,6 +91,7 @@ module.exports = {
             "@": srcDir,
         },
     },
+    cache: isDev,
     optimization: {
         runtimeChunk: true,
     },
