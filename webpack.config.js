@@ -19,13 +19,13 @@ const autoprefixer = require("autoprefixer");
 const apiMocker = require("mocker-api");
 const uploadrc = require("rc")("upload");
 
-const { MODE, HOST, PORT } = require("./env");
+const env = require("./env");
 
 const distDir = path.resolve(__dirname, "dist");
 const srcDir = path.resolve(__dirname, "src");
 const staticDir = path.join(srcDir, "static");
 
-const isDev = MODE === "dev";
+const isDev = env.MODE === "dev";
 
 module.exports = {
     mode: isDev ? "development" : "production",
@@ -100,8 +100,8 @@ module.exports = {
         contentBase: srcDir, // 静态文件来源
         compress: true,
         historyApiFallback: true,
-        host: HOST,
-        port: PORT,
+        host: env.HOST,
+        port: env.PORT,
         hot: true,
         inline: true,
         clientLogLevel: "none",
@@ -117,6 +117,12 @@ module.exports = {
         },
     },
     plugins: [
+        new webpack.DefinePlugin(
+            Object.keys(env).reduce((res, k) => {
+                res[`__${k}__`] = JSON.stringify(env[k]);
+                return res;
+            }, {})
+        ),
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: isDev

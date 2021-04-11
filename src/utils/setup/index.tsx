@@ -5,6 +5,7 @@ import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 
 import renderRoutes, { IRoute } from "../renderRoutes";
+import "@/utils/storage";
 
 interface IStart {
     routes: IRoute[];

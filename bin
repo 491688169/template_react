@@ -60,7 +60,6 @@ function getIpAddress() {
             }
         }
     });
-    console.log("ipAddress", ipAddress);
     return ipAddress;
 }
 

@@ -24,6 +24,7 @@ const conf = {
     BACKEND: getOpt(BACKEND_ADDRESS, env),
     HOST: host,
     PORT: port,
+    PRODUCT: "demo",
 };
 
 if (conf.DEV) {
