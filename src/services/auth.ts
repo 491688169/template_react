@@ -7,7 +7,12 @@ interface IAccountLogin {
     username: string;
 }
 
-export function accountLogin({ orgId, password, systemId, username }: IAccountLogin) {
+export async function accountLogin({
+    orgId,
+    password,
+    systemId,
+    username,
+}: IAccountLogin): Promise<any> {
     return request("/auth/user/loginKupeiStudent", {
         method: "POST",
         data: {

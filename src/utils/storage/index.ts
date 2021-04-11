@@ -11,7 +11,6 @@ const namespace = __PRODUCT__;
 const store = engine.createStore(storages, plugins, namespace);
 
 window.addEventListener("storage", function (e) {
-    console.log(e.key);
     if (!e.key?.startsWith(store._namespacePrefix)) {
         console.warn(
             `Not use custom storage. key: ${e.key}, oldValue: ${e.oldValue}, newValue: ${e.newValue}`
@@ -19,4 +18,4 @@ window.addEventListener("storage", function (e) {
     }
 });
 
-export default engine;
+export default store;
