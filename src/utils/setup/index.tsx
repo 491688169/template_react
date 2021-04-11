@@ -6,14 +6,22 @@ import zhCN from "antd/lib/locale-provider/zh_CN";
 
 import renderRoutes, { IRoute } from "../renderRoutes";
 import "@/utils/storage";
+import { createRequestInstance, ICreateRequestInstance } from "@/utils/request";
 
-interface IStart {
+interface IStart extends ICreateRequestInstance {
     routes: IRoute[];
     basename?: string;
     history?: "hash" | "browser";
 }
 
-export default function start({ routes, basename, history = "browser" }: IStart) {
+const G = {
+    token: "",
+};
+
+window.G = G;
+
+export default function start({ routes, basename, history = "browser", alert, baseURL }: IStart) {
+    createRequestInstance({ alert, baseURL });
     const historyObj =
         history === "hash" ? createHashHistory({ basename }) : createBrowserHistory({ basename });
     render(
