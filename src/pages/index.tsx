@@ -6,10 +6,8 @@
  * @Description:
  * @FilePath: /template_react/src/pages/index.tsx
  */
-import { message } from "antd";
-
 import start from "@/utils/setup";
 
 import routes from "@/configs/routes.config";
 
-start({ basename: "test", routes, alert: message.error, baseURL: `${__BACKEND__}/v1/` });
+start({ basename: "test", routes });

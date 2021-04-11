@@ -10,11 +10,11 @@ const { env, host, port } = require("./bin");
 const { version } = require("./package.json");
 
 const BACKEND_ADDRESS = {
-    T1: "https://t1.learnta.cn",
-    T2: "https://t2.learnta.cn",
-    T3: "https://t3.learnta.cn",
-    STAGING: "https://learnta.cn",
-    PROD: "https://learnta.cn",
+    T1: "https://api.t1.learnta.cn",
+    T2: "https://api.t2.learnta.cn",
+    T3: "https://api.t3.learnta.cn",
+    STAGING: "https://api.learnta.cn",
+    PROD: "https://api.learnta.cn",
 };
 
 const conf = {

@@ -4,11 +4,9 @@ import { createBrowserHistory, createHashHistory } from "history";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 
-import renderRoutes, { IRoute } from "../renderRoutes";
+import renderRoutes, { IRoute } from "@/utils/renderRoutes";
 import "@/utils/storage";
-import { createRequestInstance, ICreateRequestInstance } from "@/utils/request";
-
-interface IStart extends ICreateRequestInstance {
+interface IStart {
     routes: IRoute[];
     basename?: string;
     history?: "hash" | "browser";
@@ -20,8 +18,7 @@ const G = {
 
 window.G = G;
 
-export default function start({ routes, basename, history = "browser", alert, baseURL }: IStart) {
-    createRequestInstance({ alert, baseURL });
+export default function start({ routes, basename, history = "browser" }: IStart) {
     const historyObj =
         history === "hash" ? createHashHistory({ basename }) : createBrowserHistory({ basename });
     render(
