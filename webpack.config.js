@@ -1,7 +1,7 @@
 /*
  * @Author: Kim
  * @Date: 2021-04-06 13:41:01
- * @LastEditTime: 2021-04-09 14:35:41
+ * @LastEditTime: 2021-04-12 11:24:21
  * @LastEditors: Kim
  * @Description:
  * @FilePath: /template_react/webpack.config.js
@@ -13,7 +13,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ProgressBarPlugin = require("progress-bar-webpack-plugin");
+const DashboardPlugin = require("webpack-dashboard/plugin");
 const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 const autoprefixer = require("autoprefixer");
 const apiMocker = require("mocker-api");
@@ -117,6 +117,7 @@ module.exports = {
         },
     },
     plugins: [
+        new DashboardPlugin(),
         new webpack.DefinePlugin(
             Object.keys(env).reduce((res, k) => {
                 res[`__${k}__`] = JSON.stringify(env[k]);
@@ -130,7 +131,6 @@ module.exports = {
                 : require("./src/static/dll/manifest.dll.dev.json"),
         }),
         isDev ? () => {} : new BundleAnalyzerPlugin({ analyzerMode: "static" }),
-        new ProgressBarPlugin(),
         new HtmlWebpackPlugin({ template: "src/pages/index.ejs", inject: false }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
