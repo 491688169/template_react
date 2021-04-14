@@ -1,13 +1,16 @@
 /*
  * @Author: Kim
  * @Date: 2021-04-09 18:01:49
- * @LastEditTime: 2021-04-09 19:47:09
+ * @LastEditTime: 2021-04-14 13:43:21
  * @LastEditors: Kim
  * @Description:
- * @FilePath: /template_react/src/utils/renderRoutes/renderRoutes.tsx
+ * @FilePath: /template_react/src/utils/renderRoutes/index.tsx
  */
 import { FunctionComponent, createElement } from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
+
+import { IAuthorityType } from "@/components/Authorized/CheckPermission";
+import Authorized from "@/utils/authorized/Authorized";
 
 export interface IRoute {
     path?: string;
@@ -19,6 +22,7 @@ export interface IRoute {
     strict?: boolean;
     sensitive?: boolean;
     wrappers?: any[];
+    authority?: IAuthorityType;
     [k: string]: any;
 }
 
@@ -35,7 +39,7 @@ export interface IComponent extends FunctionComponent {
 
 function render({ route, props }: { route: IRoute; props?: any }) {
     const routes = renderRoutes(route.routes || [], { location: props.location });
-    const { component: Component, wrappers } = route;
+    const { component: Component, wrappers, authority } = route;
     if (Component) {
         const newProps = {
             ...props,
@@ -49,6 +53,10 @@ function render({ route, props }: { route: IRoute; props?: any }) {
                 ret = createElement(wrappers[len], newProps, ret);
                 len -= 1;
             }
+        }
+
+        if (authority) {
+            ret = createElement(Authorized, { ...newProps, authority }, ret);
         }
 
         return ret;
