@@ -1,7 +1,7 @@
 /*
  * @Author: Kim
  * @Date: 2021-04-06 13:41:01
- * @LastEditTime: 2021-04-12 11:24:21
+ * @LastEditTime: 2021-04-14 15:04:27
  * @LastEditors: Kim
  * @Description:
  * @FilePath: /template_react/webpack.config.js
@@ -100,7 +100,7 @@ module.exports = {
         contentBase: srcDir, // 静态文件来源
         compress: true,
         historyApiFallback: true,
-        host: env.HOST,
+        host: "0.0.0.0",
         port: env.PORT,
         hot: true,
         inline: true,

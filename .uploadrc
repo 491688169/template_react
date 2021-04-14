@@ -4,7 +4,7 @@
   "bucket": "learnta-frontend",
   "url": "https://frontend-alioss.learnta.com",
   "dist": "dist",
-  "prefix": "`staSrc/${process.env.PRODUCT}/${process.env.TARGET}/`",
+  "prefix": "`staSrc/${process.env.PRODUCT}/${process.env.ENV}/`",
   "ignore": [
     ".DS_Store",
     "report.html",

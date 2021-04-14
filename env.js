@@ -1,12 +1,12 @@
 /*
  * @Author: Kim
  * @Date: 2021-04-07 15:16:41
- * @LastEditTime: 2021-04-07 18:21:12
+ * @LastEditTime: 2021-04-14 15:08:19
  * @LastEditors: Kim
  * @Description:
  * @FilePath: /template_react/env.js
  */
-const { env, host, port } = require("./bin");
+const { env, port } = require("./bin");
 const { version } = require("./package.json");
 
 const BACKEND_ADDRESS = {
@@ -22,14 +22,9 @@ const conf = {
     MODE: process.env.NODE_ENV,
     ENV: env,
     BACKEND: getOpt(BACKEND_ADDRESS, env),
-    HOST: host,
     PORT: port,
     PRODUCT: "demo",
 };
-
-if (conf.DEV) {
-    conf.FRONTEND = `http://${host}:${port}/`;
-}
 
 outputConf(conf);
 
