@@ -10,13 +10,18 @@ import { IRoute } from "@/utils/renderRoutes";
 import Login from "@/pages/Login";
 import Home from "@/pages/Home";
 
+export enum PATH {
+    LOGIN = "/login",
+    HOME = "/home",
+}
+
 const routes: IRoute[] = [
     {
-        path: "/login",
+        path: PATH.LOGIN,
         component: Login,
     },
     {
-        path: "/home",
+        path: PATH.HOME,
         authority: [123],
         component: Home,
     },

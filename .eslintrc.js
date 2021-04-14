@@ -28,5 +28,7 @@ module.exports = {
         "react-hooks/rules-of-hooks": 2,
         "react-hooks/exhaustive-deps": 1,
         "react/prop-types": 0,
+        "no-unused-vars": 0,
+        "@typescript-eslint/no-unused-vars": 2,
     },
 };

@@ -15,7 +15,7 @@ import { setAuthority } from "@/utils/authorized/authority";
 
 import styles from "./index.scss";
 
-export default function Login(props: any) {
+export default function Login() {
     const history = useHistory();
 
     async function login() {
