@@ -1,7 +1,7 @@
 /*
  * @Author: Kim
  * @Date: 2021-04-06 13:41:01
- * @LastEditTime: 2021-04-14 15:04:27
+ * @LastEditTime: 2021-04-14 15:34:05
  * @LastEditors: Kim
  * @Description:
  * @FilePath: /template_react/webpack.config.js
@@ -31,7 +31,7 @@ module.exports = {
     mode: isDev ? "development" : "production",
     entry: "./src/pages/index.tsx",
     output: {
-        publicPath: isDev ? "" : uploadrc.prefix,
+        publicPath: isDev ? "/" : uploadrc.prefix,
         filename: isDev ? "[name].js" : "[name]-[chunkhash:8].js",
         path: distDir,
         chunkFilename: "[name].[chunkhash:8].js",
