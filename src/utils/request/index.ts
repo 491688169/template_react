@@ -1,3 +1,11 @@
+/*
+ * @Author: Kim
+ * @Date: 2021-04-12 09:32:50
+ * @LastEditTime: 2021-04-15 16:03:07
+ * @LastEditors: Kim
+ * @Description:
+ * @FilePath: /template_react/src/utils/request/index.ts
+ */
 import axios from "axios";
 import { message } from "antd";
 
@@ -9,8 +17,12 @@ const instance = axios.create({
     withCredentials: false,
     headers: {
         "Content-Type": "application/json;charset=utf-8",
-        Authorization: G.token ? `Bearer ${G.token}` : "Bearer ",
     },
+});
+
+instance.interceptors.request.use(function (config) {
+    config.headers.Authorization = G.token ? `Bearer ${G.token}` : "";
+    return config;
 });
 
 instance.interceptors.response.use(

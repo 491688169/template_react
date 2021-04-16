@@ -1,19 +1,19 @@
 /*
  * @Author: Kim
  * @Date: 2021-04-14 13:48:41
- * @LastEditTime: 2021-04-14 18:46:27
+ * @LastEditTime: 2021-04-15 16:09:19
  * @LastEditors: Kim
  * @Description:
  * @FilePath: /template_react/src/pages/Home/index.tsx
  */
-import { useHistory } from "react-router-dom";
+
+import { PATH } from "@/configs/routes.config";
 
 export default function Home() {
     console.log("home");
-    const history = useHistory();
 
     function handleClick() {
-        history.push("/home");
+        G.history?.push(PATH.HOME);
     }
     return (
         <div>

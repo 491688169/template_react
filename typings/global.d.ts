@@ -1,31 +1,26 @@
 /*
  * @Author: Kim
  * @Date: 2021-04-12 09:32:50
- * @LastEditTime: 2021-04-12 09:42:09
+ * @LastEditTime: 2021-04-15 15:41:11
  * @LastEditors: Kim
  * @Description:
  * @FilePath: /template_react/typings/global.d.ts
  */
-/* eslint-disable */
-declare const __PRODUCT__: string;
-declare const __BACKEND__: string;
+import { IG } from "@/utils/setup";
+declare global {
+    let __PRODUCT__: string;
+    const __BACKEND__: string;
+    const G: IG;
 
-interface IG {
-    token: string
+    interface Window {
+        G: IG;
+    }
+    module "*.scss" {
+        const classes: { readonly [key: string]: string };
+        export default classes;
+    }
+
+    interface StoreJsAPI {
+        _namespacePrefix: string;
+    }
 }
-
-interface Window {
-    G: IG
-}
-
-declare const G: IG
-
-interface StoreJsAPI {
-    _namespacePrefix: string
-}
-
-declare module "*.scss" {
-    const classes: { readonly [key: string]: string };
-    export default classes;
-}
-

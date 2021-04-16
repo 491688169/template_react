@@ -1,23 +1,21 @@
 /*
  * @Author: Kim
  * @Date: 2021-04-06 14:13:29
- * @LastEditTime: 2021-04-14 15:30:18
+ * @LastEditTime: 2021-04-16 10:11:31
  * @LastEditors: Kim
  * @Description:
  * @FilePath: /template_react/src/pages/Login/index.tsx
  */
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 
 import { accountLogin } from "@/services/auth";
 import storage from "@/utils/storage";
 import { setAuthority } from "@/utils/authorized/authority";
+import { PATH } from "@/configs/routes.config";
 
 import styles from "./index.scss";
 
 export default function Login() {
-    const history = useHistory();
-
     async function login() {
         const data = await accountLogin({
             orgId: 1000650,
@@ -35,7 +33,7 @@ export default function Login() {
 
     function handleClick() {
         setAuthority({ value: 123 });
-        history.push("/home");
+        G.gotoPage(PATH.HOME);
     }
 
     return (

@@ -1,11 +1,12 @@
 /*
  * @Author: Kim
  * @Date: 2021-04-12 09:32:50
- * @LastEditTime: 2021-04-12 16:07:55
+ * @LastEditTime: 2021-04-16 10:10:24
  * @LastEditors: Kim
  * @Description:
  * @FilePath: /template_react/src/utils/setup/index.tsx
  */
+import { History } from "history";
 import { render } from "react-dom";
 import { Router } from "react-router-dom";
 import { createBrowserHistory, createHashHistory } from "history";
@@ -13,6 +14,7 @@ import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale-provider/zh_CN";
 
 import renderRoutes, { IRoute } from "@/utils/renderRoutes";
+import { gotoSignIn, gotoPage } from "@/utils/global";
 import ScrollToTop from "@/components/ScrollToTop";
 
 interface IStart {
@@ -21,8 +23,15 @@ interface IStart {
     history?: "hash" | "browser";
 }
 
-const G = {
-    token: "",
+interface IG {
+    gotoPage: typeof gotoPage;
+    gotoSignIn: typeof gotoSignIn;
+    history?: History;
+}
+
+const G: IG = {
+    gotoSignIn,
+    gotoPage,
 };
 
 window.G = G;
@@ -30,6 +39,8 @@ window.G = G;
 export default function start({ routes, basename, history = "browser" }: IStart) {
     const historyObj =
         history === "hash" ? createHashHistory({ basename }) : createBrowserHistory({ basename });
+    G.history = historyObj;
+
     render(
         <ConfigProvider locale={zhCN}>
             <Router history={historyObj}>
