@@ -9,17 +9,17 @@
 import { render } from "react-dom";
 import { Router } from "react-router-dom";
 import { createBrowserHistory, createHashHistory, History } from "history";
+import { ConfigProvider } from "antd";
+import zhCN from "antd/lib/locale-provider/zh_CN";
 
 import renderRoutes, { IRoute } from "@/utils/renderRoutes";
-import { gotoSignIn, gotoPage, Push as push } from "./history";
+import { gotoSignIn, gotoPage } from "./history";
 import ScrollToTop from "@/components/ScrollToTop";
-import React, { useEffect, useState } from "react";
 
 interface IStart {
     routes: IRoute[];
     basename?: string;
     history?: "hash" | "browser";
-    withAntd?: boolean;
 }
 
 interface IG {
@@ -35,44 +35,18 @@ const G: IG = {
 
 window.G = G;
 
-export default function start({ routes, basename, history = "browser", withAntd = false }: IStart) {
+export default function start({ routes, basename, history = "browser" }: IStart) {
     const customHistory =
         history === "hash" ? createHashHistory({ basename }) : createBrowserHistory({ basename });
     G.history = customHistory;
-    G.history.push = push;
 
     render(
-        <AntdWrapper withAntd={withAntd}>
+        <ConfigProvider locale={zhCN} componentSize="small">
             <Router history={customHistory}>
                 <ScrollToTop />
                 {renderRoutes(routes)}
             </Router>
-        </AntdWrapper>,
+        </ConfigProvider>,
         document.querySelector("#root")
     );
 }
-
-const AntdWrapper: React.FunctionComponent<{ withAntd: boolean }> = ({ withAntd, children }) => {
-    const [Wrapper, setWrapper] = useState<React.FunctionComponent>(function (props) {
-        return <div {...props}></div>;
-    });
-    const [wrapperProps, setWrapperProps] = useState<object>();
-
-    useEffect(() => {
-        async function renderWrapper() {
-            const [configProvider, zhCN] = await Promise.all([
-                (await import("antd/es/config-provider")).default,
-                (await import("antd/es/locale/zh_CN")).default,
-            ]);
-            setWrapper(configProvider);
-            setWrapperProps({ locale: zhCN });
-        }
-
-        if (withAntd) {
-            renderWrapper();
-        }
-    }, [withAntd]);
-
-    console.log("Wrapper", Wrapper);
-    return <Wrapper {...wrapperProps}>{children}</Wrapper>;
-};

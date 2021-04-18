@@ -6,20 +6,21 @@
  * @Description:
  * @FilePath: /template_react/src/utils/setup/history.tsx
  */
-import { History } from "history";
+import { createPath } from "history";
 import { PATH } from "@/configs/routes.config";
 
 export function gotoSignIn() {
-    G.history?.push(PATH.LOGIN);
+    push(PATH.LOGIN);
 }
 
 export function gotoPage(page: PATH, state?: object) {
-    G.history.push(page, state);
+    push(page, state);
 }
 
-export function Push(this: History, page: PATH, state?: object, advanced: boolean = true) {
-    if (advanced) {
+export function push(page: PATH, state?: object) {
+    if (typeof page === "string" && page === createPath(G.history.location)) {
+        console.warn("page not change.");
         return;
     }
-    this.push(page, state);
+    G.history.push(page, state);
 }

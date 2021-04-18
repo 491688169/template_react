@@ -13,7 +13,7 @@ export default function Home() {
     console.log("home");
 
     function handleClick() {
-        G.history?.push(PATH.HOME);
+        G.gotoPage(PATH.HOME);
     }
     return (
         <div>

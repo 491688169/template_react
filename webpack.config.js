@@ -14,6 +14,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const DashboardPlugin = require("webpack-dashboard/plugin");
+const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
 const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 const autoprefixer = require("autoprefixer");
 const apiMocker = require("mocker-api");
@@ -117,6 +118,7 @@ module.exports = {
         },
     },
     plugins: [
+        new AntdDayjsWebpackPlugin(),
         new DashboardPlugin(),
         new webpack.DefinePlugin(
             Object.keys(env).reduce((res, k) => {
